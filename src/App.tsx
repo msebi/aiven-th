@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { GetGeoLocationAPI } from './hooks/GetGeoLocationAPI';
 
 function App() {
+  const geoLocation = GetGeoLocationAPI()
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        aiven Cloud Selection Panel
       </header>
+      <body className="App-body">
+        <p>
+          {geoLocation.isGeoLocationDataSet
+            ? JSON.stringify(geoLocation)
+            : "Location data not available yet."}
+        </p>
+      </body>
     </div>
   );
 }
