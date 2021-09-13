@@ -8,7 +8,7 @@ interface GeoLocationData {
     errorMsg: string
 }
 
-export const GetGeoLocationAPI = (): GeoLocationData => {
+export const GetGeoLocation = (): GeoLocationData => {
     const [geoLocationData, setGeolocationData] = useState<GeoLocationData>({
         isGeoLocationDataSet: false,
         lat: '',

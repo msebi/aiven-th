@@ -1,20 +1,31 @@
 import './App.css';
-import { GetGeoLocationAPI } from './hooks/GetGeoLocationAPI';
+import { GetGeoLocation } from './hooks/GetGeoLocation';
+import { GetCloudServiceProviders } from './hooks/GetCloudServiceProviders';
+import { CloudSelectionPanel } from './components/cloudselectionpanel/CloudSelectionPanel'
 
 function App() {
-  const geoLocation = GetGeoLocationAPI()
+  const geoLocation = GetGeoLocation()
+  const cloudProviders = GetCloudServiceProviders()
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="App-header">
         aiven Cloud Selection Panel
-      </header>
-      <body className="App-body">
+      </div>
+      <div className="App-body">
+        <CloudSelectionPanel />
         <p>
           {geoLocation.isGeoLocationDataSet
             ? JSON.stringify(geoLocation)
             : "Location data not available yet."}
         </p>
-      </body>
+        <div>
+          {
+            cloudProviders.clouds.map((provider: any) => (
+              <p id={provider.id}>{provider.cloud_description}:{provider.cloud_name}</p>
+            ))
+          }
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,29 @@
+[
+    {
+        "cloud_id": 0,
+        "cloud_description": "Africa, South Africa - Amazon Web Services: Cape Town",
+        "cloud_name": "aws-af-south-1",
+        "cloud_distance": 100,
+        "geo_latitude": -33.92,
+        "geo_longitude": 18.42,
+        "geo_region": "africa"
+    },
+    {
+        "cloud_id": 1,
+        "cloud_description": "Africa, South Africa - Azure: South Africa North",
+        "cloud_name": "azure-south-africa-north",
+        "cloud_distance": 200,
+        "geo_latitude": -26.198,
+        "geo_longitude": 28.03,
+        "geo_region": "africa"
+    },
+    {
+        "cloud_id": 2,
+        "cloud_description": "Asia, Bahrain - Amazon Web Services: Bahrain",
+        "cloud_name": "aws-me-south-1",
+        "cloud_distance": 300,
+        "geo_latitude": 26.07,
+        "geo_longitude": 50.55,
+        "geo_region": "south asia"
+    }
+]
