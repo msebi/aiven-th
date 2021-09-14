@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { PANEL_COLUMNS } from './PanelColumns';
-import stubdata from './stubdata.json'
 import './CloudSelectionPanel.css'
+import { GetCloudServiceProviders } from '../../hooks/GetCloudServiceProviders';
 
 export const CloudSelectionPanel = () => {
     // Memoize don't recreate table on every render 
+    const cloudProviders = GetCloudServiceProviders().clouds
     const columns = useMemo(() => PANEL_COLUMNS, [])
-    const data = useMemo(() => stubdata, [])
+    const data = useMemo(() => cloudProviders, [cloudProviders])
 
     const tableObject = useTable({
         columns,

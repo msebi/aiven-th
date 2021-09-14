@@ -1,6 +1,6 @@
 export const PANEL_COLUMNS = [{
     Header: 'Id',
-    accessor: 'cloud_id'
+    accessor: 'id'
 }, {
     Header: 'Cloud Description',
     accessor: 'cloud_description'
@@ -8,7 +8,7 @@ export const PANEL_COLUMNS = [{
     Header: 'Cloud Name',
     accessor: 'cloud_name'
 }, {
-    Header: 'Distance from your Location',
+    Header: 'Distance from your Location (Km)',
     accessor: 'cloud_distance'
 }, {
     Header: 'Latitude',
