@@ -1,6 +1,18 @@
-# Getting Started with Create React App
+# DB as a service assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description 
+
+This project provides a wrapper over the following REST endpoint 
+
+https://api.aiven.io/v1/clouds
+
+and provides a number of operations over the results: 
+
+* computing the distance from the user's geolocation to cloud providers (client-side)
+* result processing (filtering/sorting) (client-side)
+* a backend that caches results based on a period of time 
+* testing (to be implemented)
+* automation (to be implemented)
 
 ## Available Scripts
 
