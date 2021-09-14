@@ -49,8 +49,9 @@ export const GetGeoLocation = (): GeoLocationData => {
                 code: 1,
                 message: 'Geolocation not enabled. Cloud service providers might not be close to your location'
             })
+        } else {
+            navigator.geolocation.getCurrentPosition(onSuccess, onError)
         }
-        navigator.geolocation.getCurrentPosition(onSuccess, onError)
 
     }, [])
 

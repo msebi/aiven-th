@@ -21,7 +21,7 @@ function App() {
         <div>
           {
             cloudProviders.clouds.map((provider: any) => (
-              <p id={provider.id}>{provider.cloud_description}:{provider.cloud_name}</p>
+              <p id={provider.id}>{provider.id}:{provider.cloud_name}:{provider.cloud_distance}</p>
             ))
           }
         </div>
