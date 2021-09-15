@@ -53,7 +53,7 @@ export const GetCloudServiceProviders = (): CloudProvidersData => {
         }
 
         const getCloudProvidersFromEndpoint = (geoLocationData: GeoLocationData) => {
-            axios.get('https://api.aiven.io/v1/clouds').then(response => {
+            axios.get('http://localhost:8000/providers/get_providers/').then(response => {
                 // Add index as id field
                 let index = 0
                 response.data.clouds.forEach(function (provider: { id: number; }) {

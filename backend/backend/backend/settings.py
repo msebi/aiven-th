@@ -31,6 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # TODO: testing only
+    # https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    # https://github.com/adamchainz/django-cors-headers#setup
+    'corsheaders',
+    # / TODO: testing only
+    'get_providers.apps.GetProvidersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +46,11 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # TODO: testing only
+    # https://github.com/adamchainz/django-cors-headers#setup
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    # / TODO: testing only
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,6 +58,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 ROOT_URLCONF = 'backend.urls'
