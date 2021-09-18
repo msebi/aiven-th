@@ -16,7 +16,7 @@ class ConnectivityTests(TestCase):
         is_error = 'error' in response_content_json
         self.assertIs(is_error, True)
 
-    def test_with_unaccepted_protocol(self):
+    def test_with_incorrect_protocol(self):
         response = make_rest_request('ftp://192.168.2.1')
         response_content_json = json.loads(response.content)
         is_error = 'error' in response_content_json
