@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
-import requests
 from django.utils import timezone
+import requests
 import json
 
 # TODO: imports format <app_name>.<module_name> (not <module_name>)
@@ -16,11 +15,44 @@ def index(request):
     return HttpResponse("Backend API to fetch cloud providers")
 
 
+def is_json(response_content):
+    try:
+        response_json = json.loads(response_content)
+    except ValueError as e:
+        return False
+    return True
+
+
 # TODO: add try/catch
 def make_rest_request(url='https://api.aiven.io/v1/clouds'):
-    return requests.get(
-        url, headers={'Content-Type': 'application/json'}
-    )
+    error_response_json = {}
+    response = {}
+    # https://docs.python-requests.org/en/latest/user/quickstart/#errors-and-exceptions
+    try:
+        response = requests.get(
+            url, headers={'Content-Type': 'application/json'}
+        )
+    except requests.exceptions.Timeout:
+        error_response_json['error'] = 'timeout'
+        return JsonResponse(error_response_json)
+    except requests.exceptions.TooManyRedirects:
+        error_response_json['error'] = 'too many redirects'
+        return JsonResponse(error_response_json)
+    except requests.exceptions.RequestException as ex:
+        error_response_json['error'] = 'exception occurred: ' + str(ex)
+        return JsonResponse(error_response_json)
+
+    # check for json response with 'clouds' attribute
+    if not is_json(response.content):
+        error_response_json['error'] = 'response not in JSON format'
+        return JsonResponse(error_response_json)
+
+    # TODO: avoid hardcoded keys (create interface for aiven rest endpoints)
+    if 'clouds' not in json.loads(response.content):
+        error_response_json['error'] = 'missing key \"clouds\"'
+        return JsonResponse(error_response_json)
+
+    return response
 
 
 # TODO: add parameter validation
@@ -46,8 +78,8 @@ def return_json_response(response):
     )
 
 
-def get_providers_rest():
-    response = make_rest_request()
+def get_providers_rest(url='https://api.aiven.io/v1/clouds'):
+    response = make_rest_request(url)
     add_provider_entry(response)
     return return_json_response(response)
 
@@ -79,4 +111,3 @@ def get_providers(request):
         ProvidersCacheDate.objects.all().delete()
         Providers.objects.all().delete()
         return get_providers_rest()
-
