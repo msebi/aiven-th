@@ -5,6 +5,10 @@ import requests
 from django.utils import timezone
 import json
 
+# TODO: imports format <app_name>.<module_name> (not <module_name>)
+# NOTES: in pycharm the default python console does not load DJANGO_SETTINGS_MODULE automatically
+# run python manage.py shell to get env vars (and import models)
+# https://stackoverflow.com/a/28297987/1079483
 from get_providers.models import ProvidersCacheDate, Providers
 
 
@@ -55,23 +59,24 @@ def get_providers(request):
     if ProvidersCacheDate.objects.count() == 0:
         return get_providers_rest()
 
-    if ProvidersCacheDate.objects.filter(id=1).is_older_than():
-        # clear current cache entry
-        Providers.objects.all().delete()
-        get_providers_rest()
-    else:
+    if ProvidersCacheDate.objects.get(id=1).is_more_recent_than():
         # return cached providers
-        # TODO: abstract hardcoded strings; create helper function
+        # TODO: abstract hardcoded fields; create helper function
         response_json = {'clouds': []}
         for provider in Providers.objects.all():
             provider_json = {
-                'cloud_description': provider['cloud_description'],
-                'cloud_name': provider['cloud_name'],
-                'geo_latitude': provider['geo_latitude'],
-                'geo_longitude': provider['geo_longitude'],
-                'geo_region': provider['geo_region'],
+                'cloud_description': provider.cloud_description,
+                'cloud_name': provider.cloud_name,
+                'geo_latitude': provider.geo_latitude,
+                'geo_longitude': provider.geo_longitude,
+                'geo_region': provider.geo_region,
             }
             response_json['clouds'].append(provider_json)
 
         return JsonResponse(response_json)
+    else:
+        # clear current cache entry
+        ProvidersCacheDate.objects.all().delete()
+        Providers.objects.all().delete()
+        return get_providers_rest()
 

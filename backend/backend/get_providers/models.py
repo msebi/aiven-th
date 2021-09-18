@@ -6,11 +6,11 @@ from django.utils import timezone
 class ProvidersCacheDate(models.Model):
     cache_date = models.DateTimeField('Date providers were last fetched on')
 
-    def is_older_than(self, n_days=1):
+    def is_more_recent_than(self, n_days=1):
         return self.cache_date >= timezone.now() - datetime.timedelta(days=n_days)
 
     def __str__(self):
-        return self.cache_date
+        return self.cache_date.strftime("%m/%d/%Y, %H:%M:%S")
 
 
 class Providers(models.Model):
