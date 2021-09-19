@@ -7,7 +7,8 @@ class ProvidersCacheDate(models.Model):
     cache_date = models.DateTimeField('Date providers were last fetched on')
 
     def is_more_recent_than(self, n_days=1):
-        return self.cache_date >= timezone.now() - datetime.timedelta(days=n_days)
+        current_time = timezone.now()
+        return current_time - datetime.timedelta(days=n_days) <= self.cache_date <= current_time
 
     def __str__(self):
         return self.cache_date.strftime("%m/%d/%Y, %H:%M:%S")
