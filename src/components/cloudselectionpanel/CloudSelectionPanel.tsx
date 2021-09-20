@@ -5,12 +5,12 @@ import React, { useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter, usePagination } from 'react-table'
 import { PANEL_COLUMNS } from './PanelColumns';
 import './CloudSelectionPanel.css'
-import { GetCloudServiceProviders } from '../../hooks/GetCloudServiceProviders';
 import { GlobalFilter } from './GlobalFilter';
 
-export const CloudSelectionPanel = () => {
+
+export const CloudSelectionPanel = (cloudProvidersProps: { clouds: any; }) => {
     // Memoize don't recreate table on every render 
-    const cloudProviders = GetCloudServiceProviders().clouds
+    const cloudProviders = cloudProvidersProps.clouds
     console.log('cloudProviders: ', cloudProviders)
     const columns = useMemo(() => PANEL_COLUMNS, [])
     const data = useMemo(() => cloudProviders, [cloudProviders])    

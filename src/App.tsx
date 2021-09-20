@@ -1,7 +1,9 @@
 import './App.css';
 import { CloudSelectionPanel } from './components/cloudselectionpanel/CloudSelectionPanel'
+import { GetCloudServiceProviders } from './hooks/GetCloudServiceProviders';
 
 function App() {
+  const cloudProviders = GetCloudServiceProviders()
 
   return (
     <div className="App">
@@ -9,7 +11,7 @@ function App() {
         aiven Cloud Selection Panel
       </div>
       <div className="App-body">
-        <CloudSelectionPanel />
+        <CloudSelectionPanel {...cloudProviders}/>
       </div>
     </div>
   );
