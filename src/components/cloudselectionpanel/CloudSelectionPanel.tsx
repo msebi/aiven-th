@@ -11,6 +11,7 @@ import { GlobalFilter } from './GlobalFilter';
 export const CloudSelectionPanel = () => {
     // Memoize don't recreate table on every render 
     const cloudProviders = GetCloudServiceProviders().clouds
+    console.log('cloudProviders: ', cloudProviders)
     const columns = useMemo(() => PANEL_COLUMNS, [])
     const data = useMemo(() => cloudProviders, [cloudProviders])    
 
@@ -50,7 +51,8 @@ export const CloudSelectionPanel = () => {
     const { globalFilter, pageIndex, pageSize } = state
 
     return (
-        <>
+        cloudProviders.length ? 
+        <>            
             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter}/>
             <table {...getTableProps()}>
                 <thead>
@@ -134,6 +136,10 @@ export const CloudSelectionPanel = () => {
                     {'>>'}
                 </button>
             </div>
+        </> : <>
+            <p>
+                Fetching clouds providers ... 
+            </p>     
         </>
     );    
 }
