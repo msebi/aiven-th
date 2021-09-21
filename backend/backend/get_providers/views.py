@@ -88,6 +88,8 @@ def get_providers(request):
     # cache response for a day
     # https://django.readthedocs.io/en/stable/topics/db/models.html#extra-fields-on-many-to-many-relationships
     # TODO: add use cases for empty providers list, service unavailable (server side errors), no Internet connection
+    # TODO: in case the db has been deleted and recreated session must be cleared
+    # request.session.flush()
     if ProvidersCacheDate.objects.count() == 0:
         return get_providers_rest()
 
