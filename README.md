@@ -14,6 +14,29 @@ and provides a number of features such as:
 - testing (to be implemented)
 - automation (to be implemented)
 
+## Further Development
+
+Since this is a toy project, there are considerable bodies of work that need to be done in order to turn it into a commmercial product. This section aims
+to give an aerial view of bottlenecks that occur when scaling up
+
+### Load Balancing
+
+- used to offload requests to a set of servers (e.g. using nginx, "DNS" load balancing (resolve URL to a set of different hosts), etc.)
+
+### Caching
+
+- used in the context of dbs to reduce times of R/W operations
+- in memory caches (redis, memcache, Cassandra) store results of R ops thus avoiding disk reads on the db's side
+
+### CDNs
+
+- used to store static assets (imgs, scripts, styles)
+- advantages include geo location (close(r) to user base)
+
+### Distributed File System
+
+- used to store files (e.g. (user) images; e.g. Amazon S3)
+
 ## Setup
 
 The frontend interacts with a locally deployed backend running on port 8000
